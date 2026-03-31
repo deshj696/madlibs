@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Completely Reasonable Day</title>
+   <link rel="stylesheet" href="https://use.typekit.net/sdk7brr.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+   <h1 class="title">
+  <div class="row">
+    <span>M</span><span>A</span><span>D</span>
+    <span class="space"></span>
+    <span>L</span><span>I</span><span>B</span><span>S</span>
+    <span class="space"></span>
+ 
+  </div>
+
+  <div class="row">
+       <span>P</span><span>O</span><span>E</span><span>T</span><span>R</span><span>Y</span>
+    <span class="space"></span>
+    <span>C</span><span>L</span><span>U</span><span>B</span>
+  </div>
+</h1>
+    <p class="intro">
+      Fill in the tiles and generate a day that is only slightly falling apart.
+    </p>
+
+    <div class="form-grid">
+      <div class="tile"><input id="one" type="text" placeholder="a specific emotion"><span>1</span></div>
+      <div class="tile"><input id="two" type="text" placeholder="an animal"><span>3</span></div>
+      <div class="tile"><input id="three" type="text" placeholder="a latenight snack"><span>2</span></div>
+      <div class="tile"><input id="four" type="text" placeholder="an object"><span>4</span></div>
+      <div class="tile"><input id="five" type="text" placeholder="a body part"><span>1</span></div>
+
+      <div class="tile"><input id="six" type="text" placeholder="a color"><span>2</span></div>
+      <div class="tile"><input id="seven" type="text" placeholder="a school subject"><span>3</span></div>
+      <div class="tile"><input id="eight" type="text" placeholder="a job"><span>5</span></div>
+      <div class="tile"><input id="nine" type="text" placeholder="a thing you own"><span>2</span></div>
+      <div class="tile"><input id="ten" type="text" placeholder="an unnecessary emotion"><span>1</span></div>
+
+      <div class="tile"><input id="eleven" type="text" placeholder="a plural object"><span>4</span></div>
+      <div class="tile"><input id="twelve" type="text" placeholder="a number"><span>2</span></div>
+      <div class="tile"><input id="thirteen" type="text" placeholder="a celebrity"><span>3</span></div>
+      <div class="tile"><input id="fourteen" type="text" placeholder="an unimportant topic"><span>1</span></div>
+      <div class="tile"><input id="fifteen" type="text" placeholder="a random emotion"><span>4</span></div>
+
+      <div class="tile"><input id="sixteen" type="text" placeholder="an adjective"><span>2</span></div>
+      <div class="tile"><input id="seventeen" type="text" placeholder="crazy food combo"><span>5</span></div>
+      <div class="tile"><input id="eighteen" type="text" placeholder="a job you are unqualified for"><span>3</span></div>
+      <div class="tile"><input id="nineteen" type="text" placeholder="a ridiculous reason"><span>2</span></div>
+      <div class="tile"><input id="twenty" type="text" placeholder="something people take too seriously"><span>1</span></div>
+
+      <div class="tile"><input id="twentyone" type="text" placeholder="a random everyday object"><span>2</span></div>
+      <div class="tile"><input id="twentytwo" type="text" placeholder="a feeling you cannot explain"><span>3</span></div>
+      <div class="tile"><input id="twentythree" type="text" placeholder="another animal"><span>2</span></div>
+      <div class="tile"><input id="twentyfour" type="text" placeholder="a clothing item"><span>4</span></div>
+      <div class="tile"><input id="twentyfive" type="text" placeholder="a personality trait"><span>5</span></div>
+    </div>
+
+    <button onclick="generatePoem()">Generate Poem</button>
+
+    <div id="poem-box">
+      <h2>A Completely Unreasonable Day</h2>
+      <p id="poem">Anyone can be a Poet!</p>
+    </div>
+  </div>
+
+  <script>
+    function getValue(id, fallback) {
+      let value = document.getElementById(id).value.trim();
+      if (value === "") {
+        return fallback;
+      }
+      return value;
+    }
+
+    function generatePoem() {
+      let one = getValue("one", "strangely nostalgic");
+      let two = getValue("two", "pigeon");
+      let three = getValue("three", "leftover pizza");
+      let four = getValue("four", "house key");
+      let five = getValue("five", "left knee");
+
+      let six = getValue("six", "greenish-purple");
+      let seven = getValue("seven", "economics");
+      let eight = getValue("eight", "professional line-waiter");
+      let nine = getValue("nine", "novelty mug");
+      let ten = getValue("ten", "unearned confidence");
+
+      let eleven = getValue("eleven", "umbrellas");
+      let twelve = getValue("twelve", "14");
+      let thirteen = getValue("thirteen", "Timothée Chalamet");
+      let fourteen = getValue("fourteen", "why cereal gets soggy so fast");
+      let fifteen = getValue("fifteen", "absolute confidence");
+
+      let sixteen = getValue("sixteen", "suspiciously healthy");
+      let seventeen = getValue("seventeen", "peanut butter and orange juice");
+      let eighteen = getValue("eighteen", "astronaut");
+      let nineteen = getValue("nineteen", "excessive blinking");
+      let twenty = getValue("twenty", "productivity");
+
+      let twentyone = getValue("twentyone", "lamp");
+      let twentytwo = getValue("twentytwo", "oddly emotional");
+      let twentythree = getValue("twentythree", "ferret");
+      let twentyfour = getValue("twentyfour", "a tiny cowboy hat");
+      let twentyfive = getValue("twentyfive", "disciplined");
+
+      let poemText = `
+
+This morning I woke up feeling ${one}
+like a ${two} who just discovered ${three}.
+
+I brushed my teeth with ${four}
+because my ${five} said, "why not?"
+
+Outside, the sky looked aggressively ${six},
+like it had just failed a test on ${seven}.
+
+A ${eight} yelled at me from across the street,
+holding a ${nine} and a sense of ${ten}.
+
+I nodded, respectfully,
+as one does when confronted with ${eleven}.
+
+By noon, I had already made ${twelve} bad decisions,
+including texting ${thirteen} about ${fourteen}.
+They replied "???"
+which I took as a sign of ${fifteen}.
+
+Lunch was a ${sixteen} sandwich
+filled with ${seventeen} and mild regret.
+
+In the afternoon, I attempted to become
+a ${eighteen},
+but was rejected due to ${nineteen}.
+
+So I sat down and contemplated
+the meaning of ${twenty}
+while staring at a ${twentyone} that felt oddly ${twentytwo}.
+
+By evening, everything made sense.
+Or at least as much sense as a ${twentythree} wearing ${twentyfour}.
+
+Before bed, I whispered softly to myself:
+"tomorrow, I will be more ${twentyfive}."
+And then I absolutely will not.`;
+
+      document.getElementById("poem").innerText = poemText;
+    }
+  </script>
+
+</body>
+</html>

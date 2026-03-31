@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scrabble Tiles</title>
+  <link rel="stylesheet" href="https://use.typekit.net/sdk7brr.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #c6e8ff;
+      font-family: "pt-serif", serif;
+      font-weight: 700;
+      font-style: normal;
+      overflow: hidden;
+      cursor: pointer;
+      
+    }
+body {
+  background: repeating-linear-gradient(
+    to bottom,
+    #fffdf6,
+    #fffdf6 28px,
+    #e3dcd2 29px
+  );
+}
+body {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+body.fade-out {
+  opacity: 0;
+}
+body::before {
+  content: "";
+  position: fixed;
+  left: 80px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #ff6b6b;
+}
+    .board {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 900px;
+      padding: 40px;
+    }
+    .row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+    .tile {
+      width: 70px;
+      height: 70px;
+      background: #f4d9a6;
+      border: 2px solid #c49a6c;
+      border-radius: 8px;
+      box-shadow: 
+        0 4px 0 #b68658,
+        0 8px 15px rgba(0, 0, 0, 0.25);
+      color: #2d1b10;
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-transform: uppercase;
+      transition: transform 0.2s ease;
+      animation: floatTile 3s ease-in-out infinite;
+    }
+
+    .tile:hover {
+      transform: translateY(-6px) rotate(-2deg);
+    }
+
+    .tile .score {
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .space {
+      width: 30px;
+      height: 70px;
+      background: transparent;
+      box-shadow: none;
+      border: none;
+    }
+
+    @keyframes floatTile {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+ /* HERO LAYOUT */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome {
+  font-size: 60px;
+  font-family: "wendy-lp";
+  color: #3b2d27;
+  position: relative;
+  margin-bottom: -25px;
+}
+
+.pencil {
+  position: absolute;
+  right: 190px;
+  top: 15%;
+  transform: translateY(-50%);
+  width: 140px;
+  pointer-events: none;
+}
+  </style>
+</head>
+<body>
+<div class="hero">
+
+  <p class="welcome">welcome to the</p>
+
+  <div class="board" id="board"></div>
+
+  <img src="/archive/pencil.png" class="pencil" />
+
+</div>
+  <div class="board" id="board"></div>
+
+ <script>
+  const rows = [
+    "mad libs",
+    "poetry club"
+  ];
+
+  const board = document.getElementById("board");
+
+  const scores = {
+    a: 1, b: 3, c: 3, d: 2, e: 1,
+    f: 4, g: 2, h: 4, i: 1, j: 8,
+    k: 5, l: 1, m: 3, n: 1, o: 1,
+    p: 3, q: 10, r: 1, s: 1, t: 1,
+    u: 1, v: 4, w: 4, x: 8, y: 4, z: 10
+  };
+
+  rows.forEach((text, rowIndex) => {
+    const rowDiv = document.createElement("div");
+    rowDiv.className = "row";
+
+    text.split("").forEach((char, index) => {
+      const tile = document.createElement("div");
+
+      if (char === " ") {
+        tile.className = "space";
+      } else {
+        tile.className = "tile";
+        tile.style.animationDelay = `${(rowIndex * 10 + index) * 0.08}s`;
+
+        const letter = document.createElement("span");
+        letter.textContent = char;
+
+        const score = document.createElement("span");
+        score.className = "score";
+        score.textContent = scores[char.toLowerCase()] || "";
+
+        tile.appendChild(letter);
+        tile.appendChild(score);
+      }
+
+      rowDiv.appendChild(tile);
+    });
+
+    board.appendChild(rowDiv);
+  });
+
+  document.body.addEventListener("click", function () {
+    document.body.classList.add("fade-out");
+
+    setTimeout(function () {
+      window.location.href = "index.html";
+    }, 400);
+  });
+</script>
+
+</body>
+</html>
