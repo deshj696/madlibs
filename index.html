@@ -3,155 +3,205 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A Completely Reasonable Day</title>
-   <link rel="stylesheet" href="https://use.typekit.net/sdk7brr.css">
-  <link rel="stylesheet" href="style.css" />
+  <title>Scrabble Tiles</title>
+  <link rel="stylesheet" href="https://use.typekit.net/sdk7brr.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #c6e8ff;
+      font-family: "pt-serif", serif;
+      font-weight: 700;
+      font-style: normal;
+      overflow: hidden;
+      cursor: pointer;
+      
+    }
+body {
+  background: repeating-linear-gradient(
+    to bottom,
+    #fffdf6,
+    #fffdf6 28px,
+    #e3dcd2 29px
+  );
+}
+body {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+body.fade-out {
+  opacity: 0;
+}
+body::before {
+  content: "";
+  position: fixed;
+  left: 80px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #ff6b6b;
+}
+    .board {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 900px;
+      padding: 40px;
+    }
+    .row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+    .tile {
+      width: 70px;
+      height: 70px;
+      background: #f4d9a6;
+      border: 2px solid #c49a6c;
+      border-radius: 8px;
+      box-shadow: 
+        0 4px 0 #b68658,
+        0 8px 15px rgba(0, 0, 0, 0.25);
+      color: #2d1b10;
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-transform: uppercase;
+      transition: transform 0.2s ease;
+      animation: floatTile 3s ease-in-out infinite;
+    }
+
+    .tile:hover {
+      transform: translateY(-6px) rotate(-2deg);
+    }
+
+    .tile .score {
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .space {
+      width: 30px;
+      height: 70px;
+      background: transparent;
+      box-shadow: none;
+      border: none;
+    }
+
+    @keyframes floatTile {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome {
+  font-size: 60px;
+  font-family: "wendy-lp";
+  color: #3b2d27;
+  position: relative;
+  margin-bottom: -25px;
+}
+
+.pencil {
+  position: absolute;
+  right: 190px;
+  top: 15%;
+  transform: translateY(-50%);
+  width: 140px;
+  pointer-events: none;
+}
+  </style>
 </head>
 <body>
+<div class="hero">
 
-  <div class="container">
-   <h1 class="title">
-  <div class="row">
-    <span>M</span><span>A</span><span>D</span>
-    <span class="space"></span>
-    <span>L</span><span>I</span><span>B</span><span>S</span>
-    <span class="space"></span>
- 
-  </div>
+  <p class="welcome">welcome to the</p>
 
-  <div class="row">
-       <span>P</span><span>O</span><span>E</span><span>T</span><span>R</span><span>Y</span>
-    <span class="space"></span>
-    <span>C</span><span>L</span><span>U</span><span>B</span>
-  </div>
-</h1>
-    <p class="intro">
-      Fill in the tiles and generate a day that is only slightly falling apart.
-    </p>
+  <div class="board" id="board"></div>
 
-    <div class="form-grid">
-      <div class="tile"><input id="one" type="text" placeholder="a specific emotion"><span>1</span></div>
-      <div class="tile"><input id="two" type="text" placeholder="an animal"><span>3</span></div>
-      <div class="tile"><input id="three" type="text" placeholder="a latenight snack"><span>2</span></div>
-      <div class="tile"><input id="four" type="text" placeholder="an object"><span>4</span></div>
-      <div class="tile"><input id="five" type="text" placeholder="a body part"><span>1</span></div>
+  <img src="/archive/pencil.png" class="pencil" />
 
-      <div class="tile"><input id="six" type="text" placeholder="a color"><span>2</span></div>
-      <div class="tile"><input id="seven" type="text" placeholder="a school subject"><span>3</span></div>
-      <div class="tile"><input id="eight" type="text" placeholder="a job"><span>5</span></div>
-      <div class="tile"><input id="nine" type="text" placeholder="a thing you own"><span>2</span></div>
-      <div class="tile"><input id="ten" type="text" placeholder="an unnecessary emotion"><span>1</span></div>
+</div>
+  <div class="board" id="board"></div>
 
-      <div class="tile"><input id="eleven" type="text" placeholder="a plural object"><span>4</span></div>
-      <div class="tile"><input id="twelve" type="text" placeholder="a number"><span>2</span></div>
-      <div class="tile"><input id="thirteen" type="text" placeholder="a celebrity"><span>3</span></div>
-      <div class="tile"><input id="fourteen" type="text" placeholder="an unimportant topic"><span>1</span></div>
-      <div class="tile"><input id="fifteen" type="text" placeholder="a random emotion"><span>4</span></div>
+ <script>
+  const rows = [
+    "mad libs",
+    "poetry club"
+  ];
 
-      <div class="tile"><input id="sixteen" type="text" placeholder="an adjective"><span>2</span></div>
-      <div class="tile"><input id="seventeen" type="text" placeholder="crazy food combo"><span>5</span></div>
-      <div class="tile"><input id="eighteen" type="text" placeholder="a job you are unqualified for"><span>3</span></div>
-      <div class="tile"><input id="nineteen" type="text" placeholder="a ridiculous reason"><span>2</span></div>
-      <div class="tile"><input id="twenty" type="text" placeholder="something people take too seriously"><span>1</span></div>
+  const board = document.getElementById("board");
 
-      <div class="tile"><input id="twentyone" type="text" placeholder="a random everyday object"><span>2</span></div>
-      <div class="tile"><input id="twentytwo" type="text" placeholder="a feeling you cannot explain"><span>3</span></div>
-      <div class="tile"><input id="twentythree" type="text" placeholder="another animal"><span>2</span></div>
-      <div class="tile"><input id="twentyfour" type="text" placeholder="a clothing item"><span>4</span></div>
-      <div class="tile"><input id="twentyfive" type="text" placeholder="a personality trait"><span>5</span></div>
-    </div>
+  const scores = {
+    a: 1, b: 3, c: 3, d: 2, e: 1,
+    f: 4, g: 2, h: 4, i: 1, j: 8,
+    k: 5, l: 1, m: 3, n: 1, o: 1,
+    p: 3, q: 10, r: 1, s: 1, t: 1,
+    u: 1, v: 4, w: 4, x: 8, y: 4, z: 10
+  };
 
-    <button onclick="generatePoem()">Generate Poem</button>
+  rows.forEach((text, rowIndex) => {
+    const rowDiv = document.createElement("div");
+    rowDiv.className = "row";
 
-    <div id="poem-box">
-      <h2>A Completely Unreasonable Day</h2>
-      <p id="poem">Anyone can be a Poet!</p>
-    </div>
-  </div>
+    text.split("").forEach((char, index) => {
+      const tile = document.createElement("div");
 
-  <script>
-    function getValue(id, fallback) {
-      let value = document.getElementById(id).value.trim();
-      if (value === "") {
-        return fallback;
+      if (char === " ") {
+        tile.className = "space";
+      } else {
+        tile.className = "tile";
+        tile.style.animationDelay = `${(rowIndex * 10 + index) * 0.08}s`;
+
+        const letter = document.createElement("span");
+        letter.textContent = char;
+
+        const score = document.createElement("span");
+        score.className = "score";
+        score.textContent = scores[char.toLowerCase()] || "";
+
+        tile.appendChild(letter);
+        tile.appendChild(score);
       }
-      return value;
-    }
 
-    function generatePoem() {
-      let one = getValue("one", "strangely nostalgic");
-      let two = getValue("two", "pigeon");
-      let three = getValue("three", "leftover pizza");
-      let four = getValue("four", "house key");
-      let five = getValue("five", "left knee");
+      rowDiv.appendChild(tile);
+    });
 
-      let six = getValue("six", "greenish-purple");
-      let seven = getValue("seven", "economics");
-      let eight = getValue("eight", "professional line-waiter");
-      let nine = getValue("nine", "novelty mug");
-      let ten = getValue("ten", "unearned confidence");
+    board.appendChild(rowDiv);
+  });
 
-      let eleven = getValue("eleven", "umbrellas");
-      let twelve = getValue("twelve", "14");
-      let thirteen = getValue("thirteen", "Timothée Chalamet");
-      let fourteen = getValue("fourteen", "why cereal gets soggy so fast");
-      let fifteen = getValue("fifteen", "absolute confidence");
+  document.body.addEventListener("click", function () {
+    document.body.classList.add("fade-out");
 
-      let sixteen = getValue("sixteen", "suspiciously healthy");
-      let seventeen = getValue("seventeen", "peanut butter and orange juice");
-      let eighteen = getValue("eighteen", "astronaut");
-      let nineteen = getValue("nineteen", "excessive blinking");
-      let twenty = getValue("twenty", "productivity");
-
-      let twentyone = getValue("twentyone", "lamp");
-      let twentytwo = getValue("twentytwo", "oddly emotional");
-      let twentythree = getValue("twentythree", "ferret");
-      let twentyfour = getValue("twentyfour", "a tiny cowboy hat");
-      let twentyfive = getValue("twentyfive", "disciplined");
-
-      let poemText = `
-
-This morning I woke up feeling ${one}
-like a ${two} who just discovered ${three}.
-
-I brushed my teeth with ${four}
-because my ${five} said, "why not?"
-
-Outside, the sky looked aggressively ${six},
-like it had just failed a test on ${seven}.
-
-A ${eight} yelled at me from across the street,
-holding a ${nine} and a sense of ${ten}.
-
-I nodded, respectfully,
-as one does when confronted with ${eleven}.
-
-By noon, I had already made ${twelve} bad decisions,
-including texting ${thirteen} about ${fourteen}.
-They replied "???"
-which I took as a sign of ${fifteen}.
-
-Lunch was a ${sixteen} sandwich
-filled with ${seventeen} and mild regret.
-
-In the afternoon, I attempted to become
-a ${eighteen},
-but was rejected due to ${nineteen}.
-
-So I sat down and contemplated
-the meaning of ${twenty}
-while staring at a ${twentyone} that felt oddly ${twentytwo}.
-
-By evening, everything made sense.
-Or at least as much sense as a ${twentythree} wearing ${twentyfour}.
-
-Before bed, I whispered softly to myself:
-"tomorrow, I will be more ${twentyfive}."
-And then I absolutely will not.`;
-
-      document.getElementById("poem").innerText = poemText;
-    }
-  </script>
+    setTimeout(function () {
+      window.location.href = "home.html";
+    }, 400);
+  });
+</script>
 
 </body>
 </html>
