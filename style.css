@@ -146,7 +146,18 @@ button {
 button:hover {
   transform: translateY(-2px);
 }
+.button-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
 
+.button-row button {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-family: inherit;
+}
 #poem-box {
   background-color: #fffdf6;
   border: 2px solid #e6dccf;
